@@ -35,7 +35,7 @@ Index
 		*MBR consist physical sector of the first disk drive (i.e 512 bytes) and it’s not part of any partition.
 		*Placed on the prime disk drive, in the prime sector of the first cylinder of track is 0 and head is 0 (this whole path is generally booked for boot programs)
 		*MBR involve a mini executable programs and a table specify the primary partitions.
-		*MBR also document which primary partition is ACTIVE.
+		*MBR also documents which primary partition is ACTIVE.
 		*The BIOS surrender rights to the first stage boot loader, which then scans partition table and finds second stage boot loader on the partition configured as bootable.
 	1.3 Boot Loader
 		*The boot loader termed from 1st stage loader and loads itself into RAM. All this go on in milliseconds.
@@ -77,6 +77,15 @@ Index
 		*In /etc/rc.d/rc5.d directory files starting with letter K –> kill scripts and files starting with letter S –> Startup scripts.
 		*Start up the tty processes and xdm ( X display manager)
 		*Starts User’s login screen
+	1.6 More about init
+		*init 0 - shutdown
+		*init 1 - Single user or emergency mode where no networking no multitasking is present in this mode only root access is present in the run level.
+		*init 2 - No network but multitasking support is present
+		*init 3 - Networking and multitasking is present without GUI
+		*init 4 - It is similar to runlevel 3; It is reserved for other purposes in research.
+		*init 5 - Network is present multitasking and GUI is present with sound etc.
+		*init 6 - This runlevel is defined to system restart.
+		*init s - Tells the init command to enter the maintenance mode. When the system enters maintenance mode from another run level, only the system console is used as the terminal.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
 2.0 Linux Directory Structure and Important Files Paths Explained
@@ -177,7 +186,7 @@ Index
 	3.9 Sort Files by File Size
 		With combination of -lS displays file size in order, will display big in size first
 	3.10 Display Inode number of File or Directory()
-		We can see some number printed before file / directory name. With -i options list file / directory with inode number.An inode is an entry in inode table, containing information ( the metadata ) about a regular file and directory. An inode is a data structure on a traditional Unix-style file system such as ext3 or ext4.
+		We can see some number printed before file / directory name. With -i options list file / directory with inode number.An inode is an entry in inode table, containing information (the metadata) about a regular file and directory. An inode is a data structure on a traditional Unix-style file system such as ext3 or ext4.
 	3.11 Display UID and GID of Files
 		To display UID(User Identifier) and GID(Group Identifier) of files and directories. use option -n with ls command.
 		A UID (user identifier) is a number assigned by Linux to each user on the system. This number is used to identify the user to the system and to determine which system resources the user can access. UIDs are stored in the /etc/passwd file.Groups in Linux are defined by GIDs (group IDs). Just like with UIDs, the first 100 GIDs are usually reserved for system use. The GID of 0 corresponds to the root group and the GID of 100 usually represents the users group. GIDs are stored in the /etc/groups file.
@@ -210,7 +219,7 @@ Index
 		While dealing with white spaces we can use quotes(double or single) or back slash
 		>cd hello\ world\
 	4.10 Change from current working directory to Downloads and list all its settings in one go.
-		>cd ~/
+		>cd ~/Downloads && ls
 	4.11 Absolute and relative path
 		The absolute path specify a location in relation to the root directory.You can identify them easily as they always begin with a forward slash.
 		A relative path specify a location in relation to where we currently are in the system. They dont begin with a slash.
@@ -247,6 +256,8 @@ Index
 		>ln -s target_file link_name
 		>ln -s /etc/bashrc/script.py script
 		The -s option determines that the link is soft link. If not mentioned then it would create a hard link.
+		-> A hard link always points a filename to data on a storage device
+		-> A soft link always points a filename to another filename, which then points to information on a storage device
 	6.2 Print working directory from environment even if it contains symlinks
 		>pwd -L
 	6.3 Print actual physical current working directory by resolving all symbolic links
@@ -344,7 +355,6 @@ Index
 		If the number of contents exceed the the output terminal then use less or more command(use less preferably)
 		>cat log.txt | less 
 	10.2 Tac Command
-		Tac is practically the reverse version of cat command (also spelled backwards) which prints each line of a file starting from the bottom line and finishing on the top line to your machine standard output. One of the most important option of the command is represented by the -s switch, which separates the contents of the file based on a string or a keyword from the file
 		Tac is practically the reverse version of cat command (also spelled backwards) which prints each line of a file starting from the bottom line and finishing on the top line to your machine standard output. One of the most important option of the command is represented by the -s switch, which separates the contents of the file based on a string or a keyword from the file
 		>tac -s file.txt
 		Most important usage of tac command is, that it can provide a great help in order to debug log files, reversing the chronological order of log contents.
@@ -592,3 +602,17 @@ Index
 		We can also use the bg to bring it to the background
 		>bg <job number>
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+21.0 Tree command
+	21.1 Purpose
+		To see linux directories in a tree structure (installation required)
+	21.2 Options
+		-> a - To list all files. Tree doesnt present the file system constructs like '.'(current directory) and '..'(previous directory)
+		-> d - To list directories only
+		-> C - To colorise the output
+		-> f - To list full path of the directories
+		-> L [level] - Descend only level directories deep
+		-> x - Stay on current filesystem only.
+		-> P [pattern] - List only those files that match the pattern given
+  		-> I [pattern] - Do not list files that match the given pattern
+  		-> --ignore-case - Ignore case when pattern matching
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
