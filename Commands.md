@@ -1,5 +1,3 @@
-#Understanding Linux
-
 ## A Basic Guide to Linux Boot Process
 ---
 ### Power on
